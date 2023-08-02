@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Admin\Driver;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use Illuminate\Support\Carbon;
 use Illuminate\Console\Command;
 use App\Jobs\Notifications\AndroidPushNotification;
@@ -62,9 +62,9 @@ class ClearDemoDatabase extends Command
         $this->database->getReference('requests')->remove();
 
         $this->info("success");
-    
+
         }
-        
+
 
     }
 }

@@ -20,7 +20,7 @@
         background-color: #ffffff;
     }
 
-  
+
 
 </style>
 
@@ -33,12 +33,12 @@
         <div class="col-md-6 py-10 py-md-0  m-auto">
             <div class="text-center">
             @if($data)
-            
+
                 <h1 class="text-white">
-                  {!! $data->description !!}   
+                  {!! $data->description !!}
                 </h1>
-            
-            @endif            
+
+            @endif
                 <div class="row">
                     <div class="col-md-6 mb-5 text-md-right">
                         <a href="{{ url($data->userioslink) }}" target="_blank">
@@ -57,7 +57,7 @@
 
 </div>
 
-<!-- 
+<!--
 <section class="py-15 mt-10" id="welcome" data-jarallax data-speed=".8" style="background-image: url(img/1.jpg);">
     <div class="container">
         <div class="row">
@@ -86,7 +86,7 @@
     </div>
 </section> -->
   @if($data)
-  
+
 
 <section class="py-10 bg-light">
     <div class="container">
@@ -134,7 +134,7 @@
                             {!! $data->firstrowheadtext3 !!}
                         </h6>
                         <p class=" mb-0 text-gray-500 ">
-                            {!! $data->firstrowsubtext3 !!}                        
+                            {!! $data->firstrowsubtext3 !!}
                         </p>
                     </div>
                 </div>

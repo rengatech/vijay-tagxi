@@ -255,7 +255,7 @@ body {
   src: url("https://raw.githack.com/creativetimofficial/now-ui-kit/master/assets/fonts/nucleo-outline.woff2");
   font-weight: normal;
   font-style: normal;
-        
+
 }
 
 .now-ui-icons {
@@ -304,7 +304,7 @@ body {
                 <i class="now-ui-icons objects_umbrella-13"></i> @lang('view_pages.city_taxi')
               </a>
             </li>
-          
+
             <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#rentals" role="tab">
                 <i class="now-ui-icons shopping_shop"></i> @lang('view_pages.rentals')
@@ -312,7 +312,7 @@ body {
             </li>
               <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#outstation" role="tab">
-                <i class="now-ui-icons shopping_cart-simple"></i>@lang('view_pages.outstation') 
+                <i class="now-ui-icons shopping_cart-simple"></i>@lang('view_pages.outstation')
               </a>
             </li>
           </ul>
@@ -321,7 +321,7 @@ body {
           <!-- Tab panes -->
           <div class="tab-content text-center">
             <div class="tab-pane active" id="home" role="tabpanel">
-    
+
         <div class="radio_book">
           <input class="form-check-input" type="radio" name="book" id="booklater" value="booklater" >
           <label class="form-check-label" for="booklater">
@@ -331,31 +331,31 @@ body {
           <label class="form-check-label" for="booknow"> @lang('view_pages.book_now')
           </label>
         </div>
-     
+
        <p class="box-title txtInput">@lang('view_pages.user_details')</p>
       <div class="input-group mar1rm">
                   <input class="form-control w-100 required_for_valid" type="text"
                       placeholder="Name" name="name" id="name" aria-label="Username"
                       aria-describedby="basic-addon1">
               </div>
-            
+
               <div class="input-group mar1rm">
                   <input class="form-control w-100" type="text" name="phone"
           placeholder="Phone Number"  id="phone" aria-label="phone" aria-describedby="basic-addon1">
               </div>
-      
+
         <p class="box-title txtInput">@lang('view_pages.location_details')</p>
                                                 <div class="input-group mar1rm">
                                                     <input class="form-control w-100 required_for_valid" type="text"
                                                         placeholder="Pickup Location" name="pickup" id="pickup"
                                                         aria-label="Username" aria-describedby="basic-addon1">
-                                                  
+
                                                 </div>
                         <div class="input-group mar1rm">
                                                     <input class="form-control w-100 required_for_valid" type="text"
                                                         placeholder="Drop Location" name="drop" id="drop"
                                                         aria-label="Username" aria-describedby="basic-addon1">
-                                                  
+
                                                 </div>
 
                                                 <div class="text-left">
@@ -391,7 +391,7 @@ body {
                                             @lang('view_pages.book_cabs')
                                         </button>
                                     </div>
-                                          
+
             </div>
              <div class="tab-pane" id="rentals" role="tabpanel">
              <div class="radio_book">
@@ -405,11 +405,11 @@ body {
         </div>
               <p class="box-title txtInput">@lang('view_pages.location_details')</p>
                                                 <div class="input-group mar1rm">
-                                                
+
                                                     <input class="form-control w-100 required_for_valid" type="text"
                                                         placeholder="Pickup Location" name="pickup" id="pickup"
                                                         aria-label="Username" aria-describedby="basic-addon1">
-                                                  
+
                                                 </div>
                                                 <div class="text-left">
                                                      <p class="box-title txtInput">@lang('view_pages.start_date')</p>
@@ -436,7 +436,7 @@ body {
                                         <button type="button"
                                             class="btn btn-primary btn-md turned-button form-submit mr-auto appbtn"
                                             style="float: right">
-                                           @lang('view_pages.book_rental_cabs)
+                                           @lang('view_pages.book_rental_cabs')
                                         </button>
                                     </div>
             </div>
@@ -450,20 +450,20 @@ body {
           <label class="form-check-label" for="outstationbooknow"> @lang('view_pages.book_now')
           </label>
         </div>
-            
+
               <p class="box-title txtInput">@lang('view_pages.location_details')</p>
                                                 <div class="input-group mar1rm">
-                                                
+
                                                     <input class="form-control w-100 required_for_valid" type="text"
                                                         placeholder="Pickup Location" name="pickup" id="pickup"
                                                         aria-label="Username" aria-describedby="basic-addon1">
-                                                  
+
                                                 </div>
                                                 <div class="input-group mar1rm">
                                                     <input class="form-control w-100 required_for_valid" type="text"
                                                         placeholder="Drop Location" name="drop" id="drop"
                                                         aria-label="Username" aria-describedby="basic-addon1">
-                                                  
+
                                                 </div>
                                                 <p class="box-title txtInput">@lang('view_pages.payment_method')</p>
                                                 <div class="text-left chq-radio">
@@ -482,14 +482,14 @@ body {
                                         </button>
                                     </div>
             </div>
-           
+
           </div>
         </div>
       </div>
     </div>
 </div>
 <div class="row">
-                                                
+
                                         </div>
 </div>
   </div>

@@ -1,4 +1,4 @@
-<footer style="background: {{ $data->footerbgcolor }} !important;">
+<footer style="background: {{ $data->footerbgcolor ?? '#FFFFFF' }} !important;">
   <div class="pt-10 px-5 px-md-10">
     <div class="container-fluid text-white">
       <div class="row pt-md doot">
@@ -7,7 +7,7 @@
             <img src="{{ asset($p.$data->footerlogo) }}" alt="Footer logo" style="height: 70px;">
           </a>
           <p class="pt-2">
-            {!! $data->footertextsub  !!}   
+            {!! $data->footertextsub  !!}
             <!--Blue is a rideshare platform facilitating peer to peer ridesharing by means of connecting passengers who are in need of rides from drivers with available cars to get from point A to point B with the press of a button.-->
           </p>
         </div>

@@ -193,7 +193,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\MailConfigServiceProvider::class,
-
+        \Kreait\Laravel\Firebase\ServiceProvider::class,
     ],
 
     /*

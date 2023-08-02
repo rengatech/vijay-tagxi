@@ -10,7 +10,7 @@ use App\Models\Request\RequestMeta;
 use Illuminate\Support\Facades\Log;
 use App\Jobs\NoDriverFoundNotifyJob;
 use App\Jobs\SendRequestToNextDriversJob;
-use Kreait\Firebase\Contract\Database;
+use  Kreait\Firebase\Database;
 
 class ChangeDriversToTrips extends Command
 {

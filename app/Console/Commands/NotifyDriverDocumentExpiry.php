@@ -8,7 +8,7 @@ use App\Models\Admin\DriverDocument;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Jobs\Notifications\SendPushNotification;
 
 class NotifyDriverDocumentExpiry extends Command
@@ -50,7 +50,7 @@ class NotifyDriverDocumentExpiry extends Command
         foreach ($driverDocuments as $doc) {
             $docExpiryDate = $doc->getOriginal('expiry_date');
 
-                    
+
                     if($doc->driver->approve){
                         $doc->driver->update([
                         'approve' => false
@@ -70,9 +70,9 @@ class NotifyDriverDocumentExpiry extends Command
                     $this->database->getReference('drivers/'.$doc->driver->id)->update(['approve'=>0,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
                     $this->info('Declined successfully');
-                
+
                     }
-                    
+
         }
 
         $this->info('Command run successfully');
