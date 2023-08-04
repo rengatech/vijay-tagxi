@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Base\Constants\Auth\Role;
+
 /*
 |--------------------------------------------------------------------------
 | User API Routes
@@ -9,7 +12,6 @@
 | These routes use the root namespace 'App\Http\Controllers\Api\V1'.
 |
  */
-use App\Base\Constants\Auth\Role;
 
 /*
  * These routes are prefixed with 'api/v1/user'.

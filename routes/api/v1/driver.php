@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Admin API Routes
@@ -37,6 +39,6 @@ Route::prefix('driver')->namespace('Driver')->middleware('auth')->group(function
 
         Route::get('leader-board/trips','EarningsController@leaderBoardTrips');
         Route::get('leader-board/earnings','EarningsController@leaderBoardEarnings');
-        
+
     });
 });

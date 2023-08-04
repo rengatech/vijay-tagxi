@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Base\Constants\Auth\Role;
 
 Route::middleware('auth:web')->group(function () {

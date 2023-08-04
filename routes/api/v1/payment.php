@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | User API Routes
@@ -11,7 +13,6 @@
  */
 
 use App\Base\Constants\Auth\Role;
-use Illuminate\Support\Facades\Route;
 
 /*
  * These routes are prefixed with 'api/v1/payment'.

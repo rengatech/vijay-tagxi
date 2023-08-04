@@ -118,16 +118,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.277.5",
+            "version": "3.277.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "69539f82d8690be86f686ea5be1e572b44efcd8b"
+                "reference": "014d8eef8a24a2ef66a8284a7785a7aa48cb9b57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/69539f82d8690be86f686ea5be1e572b44efcd8b",
-                "reference": "69539f82d8690be86f686ea5be1e572b44efcd8b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/014d8eef8a24a2ef66a8284a7785a7aa48cb9b57",
+                "reference": "014d8eef8a24a2ef66a8284a7785a7aa48cb9b57",
                 "shasum": ""
             },
             "require": {
@@ -207,9 +207,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.277.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.277.6"
             },
-            "time": "2023-07-31T18:10:09+00:00"
+            "time": "2023-08-01T18:07:27+00:00"
         },
         {
             "name": "aws/aws-sdk-php-laravel",
@@ -711,128 +711,6 @@
                 "source": "https://github.com/barryvdh/ReflectionDocBlock/tree/v2.1.1"
             },
             "time": "2023-06-14T05:06:27+00:00"
-        },
-        {
-            "name": "beste/clock",
-            "version": "2.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/beste/clock.git",
-                "reference": "cf2cc16e6670a16fd2defc6d383313de829fa291"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/beste/clock/zipball/cf2cc16e6670a16fd2defc6d383313de829fa291",
-                "reference": "cf2cc16e6670a16fd2defc6d383313de829fa291",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0",
-                "stella-maris/clock": "^0.1.6"
-            },
-            "provide": {
-                "psr/clock-implementation": "1.0"
-            },
-            "require-dev": {
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.9.1",
-                "phpstan/phpstan-phpunit": "^1.2.2",
-                "phpstan/phpstan-strict-rules": "^1.4.4",
-                "phpunit/phpunit": "^9.5.26",
-                "psalm/plugin-phpunit": "^0.16.1",
-                "vimeo/psalm": "^4.29"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/Clock.php"
-                ],
-                "psr-4": {
-                    "Beste\\Clock\\": "src/Clock"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jérôme Gamez",
-                    "email": "jerome@gamez.name"
-                }
-            ],
-            "description": "A collection of Clock implementations",
-            "keywords": [
-                "clock",
-                "clock-interface",
-                "psr-20",
-                "psr20"
-            ],
-            "support": {
-                "issues": "https://github.com/beste/clock/issues",
-                "source": "https://github.com/beste/clock/tree/2.3.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/jeromegamez",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-11-25T18:24:28+00:00"
-        },
-        {
-            "name": "beste/json",
-            "version": "1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/beste/json.git",
-                "reference": "28bb9e0adf03160a124ada37ab4c099598b2de84"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/beste/json/zipball/28bb9e0adf03160a124ada37ab4c099598b2de84",
-                "reference": "28bb9e0adf03160a124ada37ab4c099598b2de84",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": "~8.1.0 || ~8.2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5.26"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/Json.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jérôme Gamez",
-                    "email": "jerome@gamez.name"
-                }
-            ],
-            "description": "A simple JSON helper to decode and encode JSON",
-            "keywords": [
-                "helper",
-                "json"
-            ],
-            "support": {
-                "issues": "https://github.com/beste/json/issues",
-                "source": "https://github.com/beste/json/tree/1.2.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/jeromegamez",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-12-19T10:26:16+00:00"
         },
         {
             "name": "binarytorch/larecipe",
@@ -4152,7 +4030,6 @@
                 "symfony/polyfill-php81": "^1.23"
             },
             "require-dev": {
-
                 "giggsey/libphonenumber-for-php": "^8.12.27",
                 "google/cloud-firestore": "^1.19.3",
                 "phpstan/extension-installer": "^1.1",
@@ -4162,7 +4039,6 @@
                 "rector/rector": "^0.12.5",
                 "symfony/var-dumper": "^5.4|^6.0",
                 "symplify/easy-coding-standard": "^10.0"
-
             },
             "suggest": {
                 "giggsey/libphonenumber-for-php": "^8.9 to validate phone numbers before attempting to send them to Firebase",
@@ -4171,7 +4047,6 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-7.x": "7.x-dev",
                     "dev-6.x": "6.x-dev",
                     "dev-5.x": "5.x-dev",
                     "dev-4.x": "4.x-dev"
@@ -4214,7 +4089,6 @@
                 }
             ],
             "time": "2023-06-10T06:51:27+00:00"
-
         },
         {
             "name": "kreait/firebase-tokens",
@@ -4982,7 +4856,6 @@
             "require": {
                 "php": "~8.1.0 || ~8.2.0",
                 "stella-maris/clock": "^0.1.7"
-
             },
             "provide": {
                 "psr/clock-implementation": "1.0"
@@ -4996,14 +4869,6 @@
                 "phpstan/phpstan-phpunit": "^1.3.2",
                 "phpstan/phpstan-strict-rules": "^1.4.4",
                 "phpunit/phpunit": "^9.5.27"
-
-                "lcobucci/coding-standard": "^10.0.0",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10.7",
-                "phpstan/phpstan-deprecation-rules": "^1.1.3",
-                "phpstan/phpstan-phpunit": "^1.3.10",
-                "phpstan/phpstan-strict-rules": "^1.5.0",
-                "phpunit/phpunit": "^10.0.17"
             },
             "type": "library",
             "autoload": {
@@ -5024,9 +4889,7 @@
             "description": "Yet another clock abstraction",
             "support": {
                 "issues": "https://github.com/lcobucci/clock/issues",
-
                 "source": "https://github.com/lcobucci/clock/tree/2.3.0"
-
             },
             "funding": [
                 {
@@ -5052,14 +4915,12 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/lcobucci/jwt/zipball/55564265fddf810504110bd68ca311932324b0e9",
                 "reference": "55564265fddf810504110bd68ca311932324b0e9",
-
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
                 "lcobucci/clock": "^2.0",
-
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
@@ -5105,9 +4966,6 @@
             "support": {
                 "issues": "https://github.com/lcobucci/jwt/issues",
                 "source": "https://github.com/lcobucci/jwt/tree/4.0.4"
-
-                // "source": "https://github.com/lcobucci/jwt/tree/4.3.0"
-
             },
             "funding": [
                 {
@@ -5120,8 +4978,6 @@
                 }
             ],
             "time": "2021-09-28T19:18:28+00:00"
-            // "time": "2023-01-02T13:28:00+00:00"
-
         },
         {
             "name": "league/commonmark",
@@ -5738,28 +5594,27 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/oauth2-server/zipball/eed31d86d8cc8e6e9c9f58fbb2113494f8b41e24",
                 "reference": "eed31d86d8cc8e6e9c9f58fbb2113494f8b41e24",
-
                 "shasum": ""
             },
             "require": {
-                "defuse/php-encryption": "^2.3",
+                "defuse/php-encryption": "^2.2.1",
+                "ext-json": "*",
                 "ext-openssl": "*",
-                "lcobucci/clock": "^2.2 || ^3.0",
-                "lcobucci/jwt": "^4.3 || ^5.0",
+                "lcobucci/jwt": "^3.4.6 || ^4.0.4",
                 "league/event": "^2.2",
-                "league/uri": "^6.7",
-                "php": "^8.0",
-                "psr/http-message": "^1.0.1 || ^2.0"
+                "league/uri": "^6.4",
+                "php": "^7.2 || ^8.0",
+                "psr/http-message": "^1.0.1"
             },
             "replace": {
                 "league/oauth2server": "*",
                 "lncd/oauth2": "*"
             },
             "require-dev": {
-                "laminas/laminas-diactoros": "^3.0.0",
+                "laminas/laminas-diactoros": "^2.4.1",
                 "phpstan/phpstan": "^0.12.57",
                 "phpstan/phpstan-phpunit": "^0.12.16",
-                "phpunit/phpunit": "^9.6.6",
+                "phpunit/phpunit": "^8.5.13",
                 "roave/security-advisories": "dev-master"
             },
             "type": "library",
@@ -5806,7 +5661,6 @@
             "support": {
                 "issues": "https://github.com/thephpleague/oauth2-server/issues",
                 "source": "https://github.com/thephpleague/oauth2-server/tree/8.4.1"
-
             },
             "funding": [
                 {
@@ -5815,7 +5669,6 @@
                 }
             ],
             "time": "2023-03-22T11:47:53+00:00"
-
         },
         {
             "name": "league/uri",
@@ -14335,16 +14188,16 @@
         },
         {
             "name": "sebastian/global-state",
-            "version": "5.0.5",
+            "version": "5.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/global-state.git",
-                "reference": "0ca8db5a5fc9c8646244e629625ac486fa286bf2"
+                "reference": "bde739e7565280bda77be70044ac1047bc007e34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/0ca8db5a5fc9c8646244e629625ac486fa286bf2",
-                "reference": "0ca8db5a5fc9c8646244e629625ac486fa286bf2",
+                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/bde739e7565280bda77be70044ac1047bc007e34",
+                "reference": "bde739e7565280bda77be70044ac1047bc007e34",
                 "shasum": ""
             },
             "require": {
@@ -14387,7 +14240,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/global-state/issues",
-                "source": "https://github.com/sebastianbergmann/global-state/tree/5.0.5"
+                "source": "https://github.com/sebastianbergmann/global-state/tree/5.0.6"
             },
             "funding": [
                 {
@@ -14395,7 +14248,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-14T08:28:10+00:00"
+            "time": "2023-08-02T09:26:13+00:00"
         },
         {
             "name": "sebastian/lines-of-code",

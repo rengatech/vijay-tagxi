@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\Common\CityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +18,7 @@ use App\Http\Controllers\Api\V1\Common\CityController;
 Route::namespace('Common')->group(function () {
 
     // List all the cities.
-    Route::get('cities', [CityController::class, 'index']);
+    Route::get('cities', 'CityController@index');
 
     // Get Cities by State
     Route::get('cities/by/state/{state_id}', 'CityController@byState');
