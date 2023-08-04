@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Base\Constants\Auth\Role;
 use App\Http\Controllers\ApiController;
 use App\Models\User;
-use Redirect;
+use Illuminate\Support\Facades\Redirect;
 
 abstract class BaseController extends ApiController
 {

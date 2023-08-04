@@ -16,7 +16,7 @@ use App\Models\User;
 
 class RideBookingController extends Controller
 {
-  
+
  public function uploadPath()
     {
         return config('base.cms.upload.web-picture.path');
@@ -25,8 +25,8 @@ class RideBookingController extends Controller
   {
 
    $countries = Country::all();
-    
-     return view ('webfront.rideIndex', compact('countries'));   
+
+     return view ('webfront.rideIndex', compact('countries'));
   }
   public function userVerification(Request $request)
   {
@@ -35,11 +35,11 @@ class RideBookingController extends Controller
 
     return $user;
 
-  }   
+  }
 
   public function signUp()
   {
     $mobile = request()->input()->mobile;
-     return view ('webfront.signup');   
+     return view ('webfront.signup');
   }
 }

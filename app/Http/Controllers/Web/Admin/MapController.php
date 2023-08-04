@@ -83,13 +83,13 @@ class MapController extends Controller
 
     public function mapViewMapbox()
     {
-         $page = trans('pages_names.map');
+        $page = trans('pages_names.map');
         $main_menu = 'manage-map';
         $sub_menu = 'map-mapbox';
 
         $default_lat = get_settings('default_latitude');
         $default_lng = get_settings('default_longitude');
-        
+
         $zone = Zone::active()->companyKey()->first();
 
         if ($zone) {

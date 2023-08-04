@@ -209,8 +209,8 @@ trait UserAccessTrait
      * @throws Exception
      */
     public function attachRole($role)
-    {   
-      
+    {
+
         $roleId = $this->getRoleId($role);
 
         $this->roles()->syncWithoutDetaching($roleId);

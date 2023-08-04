@@ -10,7 +10,7 @@ use App\Http\Requests\Auth\Registration\UserRegistrationRequest;
 use App\Jobs\Notifications\Auth\Registration\UserRegistrationNotification;
 use App\Models\User;
 use App\Models\Admin\AdminDetail;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class AdminRegistrationController extends ApiController

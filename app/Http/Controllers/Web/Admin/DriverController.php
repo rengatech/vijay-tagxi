@@ -32,6 +32,7 @@ use App\Models\Request\Request as RequestRequest;
 use App\Models\Request\RequestRating;
 use App\Base\Filters\Admin\RequestFilter;
 use App\Models\Payment\DriverWalletHistory;
+use App\Models\Payment\UserWalletHistory;
 use App\Models\Payment\DriverWallet;
 use App\Http\Requests\Admin\Driver\AddDriverMoneyToWalletRequest;
 use App\Transformers\Payment\DriverWalletHistoryTransformer;
@@ -39,7 +40,7 @@ use App\Base\Constants\Masters\WalletRemarks;
 use Illuminate\Support\Str;
 use App\Models\Payment\WalletWithdrawalRequest;
 use App\Base\Constants\Setting\Settings;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Jobs\Notifications\SendPushNotification;
 use App\Imports\DriversImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -247,10 +248,10 @@ class DriverController extends BaseController
         $driver_detail = $driver->driverDetail()->create($driver_detail_data);
 
 
-        foreach ($request->input('type') as $type) 
+        foreach ($request->input('type') as $type)
         {
                 DriverVehicleType::create(['driver_id' => $driver->id,
-                'vehicle_type' => $type,]);        
+                'vehicle_type' => $type,]);
         }
 
         // Create Empty Wallet to the driver
@@ -289,7 +290,7 @@ class DriverController extends BaseController
       if(env('APP_FOR')=='demo'){
             $message = 'you cannot perform this action. this is demo version';
         return redirect('drivers')->with('success', $message);
-            
+
         }
 
         // dd($request);
@@ -311,12 +312,12 @@ class DriverController extends BaseController
         $user_param = $request->only(['profile']);
 
         $user_param['profile']=null;
-        
+
         if ($uploadedFile = $this->getValidatedUpload('profile_picture', $request)) {
             $user_param['profile'] = $this->imageUploader->file($uploadedFile)
                 ->saveProfilePicture();
         }
-        
+
         $driver->update(['name'=>$request->input('name'),
             'email'=>$request->input('email'),
             'mobile'=>$request->input('mobile'),
@@ -339,15 +340,15 @@ class DriverController extends BaseController
 
         // dd($driverVehicleTypes);
 
-        foreach ($driverVehicleTypes as $driverVehicleType) 
+        foreach ($driverVehicleTypes as $driverVehicleType)
         {
             $driverVehicleType->delete();
         }
 
-        foreach ($request->type as $type) 
+        foreach ($request->type as $type)
         {
              DriverVehicleType::create(['driver_id' => $driver->id,
-                'vehicle_type' => $type,]);  
+                'vehicle_type' => $type,]);
         }
 
         $message = trans('succes_messages.driver_added_succesfully');
@@ -511,7 +512,7 @@ class DriverController extends BaseController
         // dd($item);
         $bankInfo = $driver->user->bankInfo;
         $amount = DriverWallet::where('user_id',$driver->id)->first();
-        
+
         if ($amount == null) {
 
          $card = [];
@@ -580,7 +581,7 @@ class DriverController extends BaseController
         $page = trans('pages_names.drivers');
         $main_menu = 'drivers';
         $sub_menu = 'driver_ratings';
-       
+
         return view('admin.drivers.driver-ratings', compact('page', 'main_menu', 'sub_menu'));
 
     }
