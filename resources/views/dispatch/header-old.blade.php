@@ -7,7 +7,7 @@
                         <span>
                             {{ app_name() ?? 'Tagyourtaxi' }}
                         </span>
-                        
+
                     </div>
             </a>
 
@@ -20,7 +20,11 @@
                     data-bs-toggle="modal">
                     Book Now
                 </button>
-            
+                <button type="button" class="btn btn-primary btn-sm turned-button mr-auto booking_screen" data-id="available-car"
+                    data-bs-toggle="modal">
+                    Available Cars
+                </button>
+
             <ul class="navbar-nav navbar-nav-icons flex-row align-items-center" style="margin-left: auto;">
                 <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#"
                         role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -33,9 +37,9 @@
                             <span class="dropdown-item fw-bold text-warning"><span
                                     class="fas fa-crown me-1"></span><span>{{ ucfirst(auth()->user()->name) }}</span></span>
                             <div class="dropdown-divider"></div>
-    
+
                             {{-- <a class="dropdown-item" href="{{ url('dispatch/profile') }}">Profile</a> --}}
-                            
+
                             <a class="dropdown-item" href="{{ url('api/spa/logout') }}">Logout</a>
                         </div>
                     </div>

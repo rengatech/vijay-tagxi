@@ -39,7 +39,7 @@ class DispatcherController extends BaseController
          $main_menu = 'dispatch_request';
 
         $sub_menu = null;
-       
+
         $default_lat = get_settings('default_latitude');
         $default_lng = get_settings('default_longitude');
 
@@ -86,7 +86,7 @@ class DispatcherController extends BaseController
 
      public function requestDetailedView(RequestRequest $requestmodel){
         $item = $requestmodel;
-        
+
         return view('dispatch.request_detail',compact('item'));
     }
 }

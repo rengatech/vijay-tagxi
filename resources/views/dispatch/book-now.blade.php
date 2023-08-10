@@ -43,7 +43,7 @@
 
                                         </div>
                                     </div>
-                                   
+
                                     <div class="card p-3 mb-3 book">
                                         <div class="row">
                                             <div class="col-12">
@@ -402,7 +402,7 @@
   //   navigator.geolocation.getCurrentPosition(callback);
   // }
 
-               
+
 
                 var directionsService = new google.maps.DirectionsService();
                 var directionsRenderer = new google.maps.DirectionsRenderer({
@@ -431,11 +431,16 @@
                 };
 
                 function initialize() {
+                    @if(auth()->user()->admin->serviceLocationDetail)
                     var centerLat = parseFloat("{{ auth()->user()->admin->serviceLocationDetail->zones()->pluck('lat')->first() ?? get_settings('default_latitude')}}");
+                    @endif
+                    @if(auth()->user()->admin->serviceLocationDetail)
                     var centerLng = parseFloat("{{ auth()->user()->admin->serviceLocationDetail->zones()->pluck('lng')->first() ?? get_settings('default_longitude')}}");
+                    @endif
                     var pickup = document.getElementById('pickup');
                     var drop = document.getElementById('drop');//11.018511, 76.969897
                     var latlng = new google.maps.LatLng(centerLat,centerLng);
+                    initialize(centerLat, centerLng);
 
                     map = new google.maps.Map(document.getElementById('book-now-map'), {
                         center: latlng,
@@ -447,23 +452,23 @@
                     //     infowindow.close();
                     //   });
 
-              
+
                     directionsRenderer.setMap(map);
-                       
+
                     var geocoder = new google.maps.Geocoder();
 
                     var pickup_location = new google.maps.places.Autocomplete(pickup);
                     var drop_location = new google.maps.places.Autocomplete(drop);
 
-                    
+
 
                     pickup_location.addListener('place_changed', function() {
-                      
+
                         // pickUpMarker.setVisible(false);
 
                         var place = pickup_location.getPlace();
                         // console.log(place);
-
+-
                         if (!place.geometry) {
                             // window.alert("Autocomplete's returned place contains no geometry");
                             return;
@@ -497,7 +502,7 @@
                          google.maps.event.addListener(pickUpMarker, 'dragend', function() {
                             geocodePosition(pickUpMarker.getPosition());
                           });
-                          
+
                           // google.maps.event.addListener(pickUpMarker, 'click', function() {
                           //   if (pickUpMarker.formatted_address) {
                           //     infowindow.setContent(pickUpMarker.formatted_address + "<br>coordinates: " + pickUpMarker.getPosition().toUrlValue(6));
@@ -508,7 +513,7 @@
                           // });
                           google.maps.event.trigger(pickUpMarker, 'click')
 
-                       
+
 
                         // console.log(pickUpMarker.setPosition(place.geometry.location));
 
@@ -517,8 +522,8 @@
                             calcRoute(pickUpLocation, dropLocation)
 
                         bindDataToForm(place.formatted_address, pickUpLat, pickUpLng, 'pickup');
-                        
-                       
+
+
                     });
 
                     drop_location.addListener('place_changed', function() {
@@ -571,7 +576,7 @@
 
 
 
-                        
+
 
                         if (pickUpLocation)
                             calcRoute(pickUpLocation, dropLocation)
@@ -579,9 +584,9 @@
                         bindDataToForm(place.formatted_address, dropLat, dropLng, 'drop');
                     });
 
-                    // @TODO this function will work on marker move event into map 
+                    // @TODO this function will work on marker move event into map
                     // google.maps.event.addListener(pickUpMarker, 'dragend', function() {
-                        
+
                     //     console.log("hi");
                     //     geocoder.geocode({
                     //         'latLng': pickUpMarker.getPosition()
@@ -595,8 +600,8 @@
                     //                     .getPosition().lat(), pickUpMarker.getPosition()
                     //                     .lng());
                     //                 fillInAddress(results[0]);
-                                   
-                                   
+
+
                     //                 calcRoute(pickup, dropLocation);
                     //             }
                     //         }
@@ -629,7 +634,7 @@
                         // infowindow.setContent(pickUpMarker.formatted_address + "<br>coordinates: " + pickUpMarker.getPosition().toUrlValue(6));
                         // infowindow.open(map, pickUpMarker);
                       });
-                    } 
+                    }
 
                     function geocodedropPosition(pos) {
                       geocoder.geocode({
@@ -661,13 +666,13 @@
 
 
                     // calcRoute(pickup, drop);
-                    
+
 
                 }
 
                  google.maps.event.addDomListener(window, 'load', initialize);
 
-               
+
 
 
 
@@ -932,7 +937,7 @@
                                 //                         </div>
                                 //                     </div>
                                 //                 </a>
-                                //             </div>`;    
+                                //             </div>`;
                                 //     }
                                 // });
                             });
@@ -999,7 +1004,7 @@
                     // calculateEta(packageTruckId,fareTypeId);
                 });
 
-                // Remove selected package 
+                // Remove selected package
                 $(document).on('click', '.removePackage', function() {
                     var id = $(this).attr('id');
                     $('.addPackageBtn').empty();
