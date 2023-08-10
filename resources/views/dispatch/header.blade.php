@@ -7,7 +7,7 @@
                         <span>
                             {{ app_name() ?? 'Tagxi' }}
                         </span>
-                        
+
                     </div>
             </a>
 
@@ -16,13 +16,18 @@
                    @lang('view_pages.book_later')
                 </button>
 
-                <button type="button" class="btn btn-primary btn-sm turned-button mr-auto booking_screen" data-id="book-now"
+                <button type="button" class="btn btn-primary btn-sm turned-button mx-4 mr-auto booking_screen" data-id="book-now"
                     data-bs-toggle="modal">
                    @lang('view_pages.book_now')
                 </button>
 
+                <button type="button" class="btn btn-primary btn-sm  turned-button mr-auto booking_screen" data-id="available-car"
+                    data-bs-toggle="modal">
+                   @lang('view_pages.available_car')
+                </button>
+
                 {{-- <a href="{{url('dispatch/book-now')}}" class="btn btn-primary btn-sm">@lang('view_pages.book_now')</a> --}}
-            
+
             <ul class="navbar-nav navbar-nav-icons flex-row align-items-center" style="margin-left: auto;">
                 <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#"
                         role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,9 +40,9 @@
                             <span class="dropdown-item fw-bold text-warning"><span
                                     class="fas fa-crown me-1"></span><span>{{ ucfirst(auth()->user()->name) }}</span></span>
                             <div class="dropdown-divider"></div>
-    
+
                             {{-- <a class="dropdown-item" href="{{ url('dispatch/profile') }}">@lang('view_pages.profile')</a> --}}
-                            
+
                             <a class="dropdown-item" href="{{ url('api/spa/logout') }}">@lang('view_pages.logout')</a>
                         </div>
                     </div>

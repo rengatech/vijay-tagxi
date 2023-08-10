@@ -271,31 +271,35 @@
         src="https://maps.google.com/maps/api/js?key={{get_settings('google_map_key')}}&libraries=places"></script>
 
     <script>
-        var lat = parseFloat("{{ auth()->user()->admin->serviceLocationDetail->zones()->pluck('lat')->first() ?? get_settings('default_latitude')}}");
-        var lng = parseFloat("{{ auth()->user()->admin->serviceLocationDetail->zones()->pluck('lng')->first() ?? get_settings('default_longitude')}}");
+         @if(auth()->user()->admin->serviceLocationDetail)
+                    var centerLat = parseFloat("{{ auth()->user()->admin->serviceLocationDetail->zones()->pluck('lat')->first() ?? get_settings('default_latitude')}}");
+                    @endif
+                    @if(auth()->user()->admin->serviceLocationDetail)
+                    var centerLng = parseFloat("{{ auth()->user()->admin->serviceLocationDetail->zones()->pluck('lng')->first() ?? get_settings('default_longitude')}}");
+                    @endif
 
         // Get user current location
-        // if (navigator.geolocation) {
-        //     navigator.geolocation.getCurrentPosition(position => {
-        //         lat = position.coords.latitude
-        //         lng = position.coords.longitude
-        //         loadMap(lat,lng);
-        //     },
-        //     err => {
-        //         loadMap(lat,lng);
-        //     });
-        // }else{
-        //     loadMap(lat,lng);
-        // }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                lat = position.coords.latitude
+                lng = position.coords.longitude
+                loadMap(lat,lng);
+            },
+            err => {
+                loadMap(lat,lng);
+            });
+        }else{
+            loadMap(lat,lng);
+        }
         // loadMap(lat,lng);
 
-        // function loadMap(lat,lng) {
-        //     var map = new google.maps.Map(document.getElementById("map"), {
-        //         center: new google.maps.LatLng(lat, lng),
-        //         zoom: 13,
-        //         mapTypeId: google.maps.MapTypeId.ROADMAP
-        //     });
-        // }
+        function loadMap(lat,lng) {
+            var map = new google.maps.Map(document.getElementById("map"), {
+                center: new google.maps.LatLng(lat, lng),
+                zoom: 13,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+        }
 
         function fetchRequestList(column = null, value = null) {
             let query = '';
@@ -430,7 +434,7 @@
             scaleControl: true,
             streetViewControl: false,
             fullscreenControl: true,
-           
+
         });
 
         var iconBase = '{{ asset('map/icon/') }}';
@@ -503,7 +507,7 @@
 
                     marker.push(carIcon);
                     carIcon.setMap(map);
-                     
+
 
 
 
@@ -513,7 +517,7 @@
             });
         }
 
-       
+
 
         // To rotate truck based on driver bearing
         function rotateMarker(carimage, bearing) {

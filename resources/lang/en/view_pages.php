@@ -16,6 +16,7 @@ return array (
   'book' => 'Book',
   'book_later' => 'Book Later',
   'book_now' => 'Book Now',
+  'available_car' => 'Available Cars',
   'all' => 'All',
   'assigned' => 'Assigned',
   'unassigned' => 'Un-Assigned',
@@ -808,7 +809,7 @@ return array (
   'verified' => 'Verified',
   'admin_commision_type' => 'Admin Commision Type',
   'service_tax_in_percentage' => 'Service Tax In Percentage',
-  
+
   'ccavenue_settings' => 'CCAvenue Settings',
   'enable-ccavenue' => 'Enable CCAvenue',
   'working-key' => 'Working Key',

@@ -340,7 +340,7 @@ if (!function_exists('get_settings')) {
         // }
 
         return Setting::whereName($key)->pluck('value')->first();
-        
+
     }
 }
 
@@ -1328,7 +1328,7 @@ if (! function_exists('get_line_string')) {
         curl_close($ch);
 
         // Log::info($result);
-        
+
 
         $encoded_result = json_decode($result);
 
