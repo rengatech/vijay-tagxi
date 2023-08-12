@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Country;
 use App\Models\Admin\Driver;
 use Illuminate\Http\Request;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Base\Constants\Auth\Role;
 use Illuminate\Support\Facades\DB;
 use App\Events\Auth\UserRegistered;
@@ -107,7 +107,7 @@ class DriverSignupController extends LoginController
         if ($validate_exists_mobile) {
             $this->throwCustomException('Provided mobile has already been taken');
         }
-        
+
         if (!$country_code) {
             $this->throwCustomException('unable to find country');
         }
@@ -123,7 +123,7 @@ class DriverSignupController extends LoginController
         }
         // DB::beginTransaction();
         // try {
-    
+
         $data = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -139,11 +139,11 @@ class DriverSignupController extends LoginController
             'lang'=>$request->input('lang')
         ];
 
-        if ($request->has('email_confirmed') == true) 
+        if ($request->has('email_confirmed') == true)
         {
             $data['email_confirmed'] = true;
         }
-        
+
         // DB::enableQueryLog();
         if (env('APP_FOR')=='demo' && $request->has('company_key') && $request->input('company_key')) {
             $data['company_key'] = $request->input('company_key');
@@ -153,7 +153,7 @@ class DriverSignupController extends LoginController
 
             $data['is_bid_app']=1;
         }
-        
+
         $user = $this->user->create($data);
         // dd($user);
         // dd(DB::getQueryLog());
@@ -164,16 +164,16 @@ class DriverSignupController extends LoginController
 
 // request has multi vehicles
         // Log::info($request->vehicle_types);
-        
+
         if($request->has('vehicle_types')){
 
             foreach (json_decode($request->vehicle_types) as $key => $type) {
 
-        
+
                 $driver->driverVehicleTypeDetail()->create(['driver_id'=>$driver->id,'vehicle_type'=>$type]);
-            
+
             }
-            
+
         }
 // request has multi vehicles
 
@@ -239,7 +239,7 @@ class DriverSignupController extends LoginController
         if($request->has('role') && $request->role=='driver'){
 
             $validate_exists_mobile = $this->user->belongsTorole(Role::DRIVER)->where('mobile', $mobile)->exists();
-        
+
         }
         if($request->has('role') && $request->role=='owner'){
 
@@ -263,7 +263,7 @@ class DriverSignupController extends LoginController
         if ($validate_exists_email) {
             $this->throwCustomException('Provided email has already been taken');
         }
-        
+
         }
 
         if ($validate_exists_mobile) {
@@ -272,7 +272,7 @@ class DriverSignupController extends LoginController
 
         return $this->respondSuccess(null, 'mobile_validated');
     }
-   
+
     /**
     * Validate Mobile-For-Driver-For-Login
     * @bodyParam mobile integer required mobile of driver
@@ -283,7 +283,7 @@ class DriverSignupController extends LoginController
      */
     public function validateDriverMobileForLogin(Request $request)
     {
-      if ($request->has('mobile')) 
+      if ($request->has('mobile'))
         {
 
         $mobile = $request->mobile;
@@ -298,7 +298,7 @@ class DriverSignupController extends LoginController
         if($request->has('role') && $request->role=='owner'){
 
             $validate_exists_mobile = $this->user->belongsTorole(Role::OWNER)->where('mobile', $mobile)->exists();
-        }   
+        }
 
         if ($validate_exists_mobile) {
             return $this->respondSuccess(null, 'mobile_exists');
@@ -306,7 +306,7 @@ class DriverSignupController extends LoginController
 
         return $this->respondFailed('mobile_does_not_exists');
        }
-      if ($request->has('email')) 
+      if ($request->has('email'))
         {
 
         $email = $request->email;
@@ -321,7 +321,7 @@ class DriverSignupController extends LoginController
         if($request->has('role') && $request->role=='owner'){
 
             $validate_exists_email = $this->user->belongsTorole(Role::OWNER)->where('email', $email)->exists();
-        }   
+        }
 
         if ($validate_exists_email) {
             return $this->respondSuccess(null, 'email_exists');
@@ -379,7 +379,7 @@ class DriverSignupController extends LoginController
      * @bodyParam login_by tinyInt required from which device the owner registered
      * @return \Illuminate\Http\JsonResponse
      * @responseFile responses/auth/register.json
-     * 
+     *
      * */
     public function ownerRegister(Request $request){
 
@@ -434,7 +434,7 @@ class DriverSignupController extends LoginController
         if ($validate_exists_mobile) {
             $this->throwCustomException('Provided mobile has already been taken');
         }
-        if ($request->has('email_confirmed') == true) 
+        if ($request->has('email_confirmed') == true)
         {
             $data['email_confirmed'] = true;
         }
@@ -462,7 +462,7 @@ class DriverSignupController extends LoginController
         $owner = $user->owner()->create($created_params);
 
         $owner_wallet = $owner->ownerWalletDetail()->create(['amount_added'=>0]);
-        
+
 
         $this->database->getReference('owners/'.$owner->id)->set(['id'=>$owner->id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
