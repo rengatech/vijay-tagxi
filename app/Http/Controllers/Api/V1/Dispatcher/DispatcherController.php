@@ -20,11 +20,14 @@ use App\Transformers\Requests\TripRequestTransformer;
 use App\Models\User;
 use App\Transformers\Requests\UserRequestForDispatcherAppTransformer;
 use Sk\Geohash\Geohash;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Base\Constants\Auth\Role;
 use Carbon\Carbon;
 use App\Transformers\Dispatcher\UserForDispatcherRideTransformer;
 use App\Jobs\Notifications\SendPushNotification;
+use App\Models\Admin\ComplaintTitle;
+use App\Models\Admin\DriverDetail;
+use App\Models\Admin\Fleet;
 use App\Transformers\User\ZoneTransformer;
 
 /**
@@ -60,10 +63,31 @@ class DispatcherController extends BaseController
       $zones = Zone::whereActive(true)->get();
 
         $zone = fractal($zones, new ZoneTransformer)->parseIncludes(['airport', 'serviceLocation']);
-     
+
         // dd($zones);
 
         return $this->respondOk($zone);
 
    }
+
+//    public function carCount()
+//    {
+
+//    }
+
+    public function availbleCars(Request $request)
+    {
+        $driver_detail = DriverDetail::where($request->current_zone)->get();
+
+
+        dd($driver_detail);
+
+        // $createZone = Fleet::whereHas('driverDetail', function ($query) use ($driver_detail) {
+        //     $query->where('current_zone', '=', $driver_detail->id);
+        // })->get();
+
+
+
+        return response()->json($driver_detail);
+    }
 }

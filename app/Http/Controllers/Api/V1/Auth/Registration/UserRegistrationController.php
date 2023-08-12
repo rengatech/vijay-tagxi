@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Auth\Registration;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 use Twilio;
 use App\Models\User;
 use App\Models\Country;
@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Jobs\Mails\SendMailNotification;
 use App\Models\MailOtp;
 use App\Mail\OtpMail;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * @group SignUp-And-Otp-Validation
@@ -87,17 +88,17 @@ class UserRegistrationController extends LoginController
         $email = $request->input('email');
 
         $mail_otp_exists =  MailOtp::where('email', $email)->exists();
-        
+
         if($mail_otp_exists == false)
         {
         $otp = mt_rand(100000, 999999);
 
         $newOTP = MailOtp::create([
-            'email' => $email, 
+            'email' => $email,
             'otp' => $otp,
         ]);
-        
-     
+
+
           Mail::to($email)->send(new OtpMail($otp));
 
         }else{
@@ -105,7 +106,7 @@ class UserRegistrationController extends LoginController
            $mailOtp = MailOtp::where('email', $email)->first();
 
            $otp = mt_rand(100000, 999999);
-           
+
            $mailOtp->update(['otp' => $otp]);
 
            Mail::to($email)->send(new OtpMail($otp));
@@ -131,7 +132,7 @@ class UserRegistrationController extends LoginController
         $verify_otp = MailOtp::where('email' ,$email)->where('otp', $otp)->exists();
 
 
-        if ($verify_otp == false) 
+        if ($verify_otp == false)
         {
             $this->throwCustomValidationException(['message' => "The otp provided has Invaild" ]);
         }
@@ -161,8 +162,7 @@ class UserRegistrationController extends LoginController
      */
     public function register(UserRegistrationRequest $request)
     {
-// dd($request);
-        
+
         $mobileUuid = $request->input('uuid');
 
         $country_id =  $this->country->where('code', $request->input('country'))->pluck('id')->first();
@@ -174,7 +174,7 @@ class UserRegistrationController extends LoginController
              if($request->is_web){
 
                 $user = $this->user->belongsTorole(Role::USER)->where('email', $request->email)->first();
-                
+
                 return $this->authenticateAndRespond($user, $request, $needsToken=true);
 
             }
@@ -240,7 +240,7 @@ class UserRegistrationController extends LoginController
 
             $user_params['is_bid_app']=1;
         }
-        if ($request->has('email_confirmed') == true) 
+        if ($request->has('email_confirmed') == true)
         {
             $user_params['email_confirmed']= true;
         }
@@ -252,19 +252,20 @@ class UserRegistrationController extends LoginController
         }
         $user = $this->user->create($user_params);
 
-        // $this->otpHandler->delete($mobileUuid);
+        $this->otpHandler->delete($mobileUuid);
 
         // Create Empty Wallet to the user
         $user->userWallet()->create(['amount_added'=>0]);
 
         $user->attachRole(Role::USER);
 
-        // $this->dispatch(new UserRegistrationNotification($user));
+        $this->dispatch(new UserRegistrationNotification($user));
 
         event(new UserRegistered($user));
 
 
         if ($request->has('oauth_token') & $request->input('oauth_token')) {
+            $provider = 'facebook';
             $oauth_token = $request->oauth_token;
             $social_user = Socialite::driver($provider)->userFromToken($oauth_token);
             // Update User data with social provider
@@ -300,7 +301,7 @@ class UserRegistrationController extends LoginController
 
         $user_mail = $user->email;
         if($mail_template != null){
-            // dispatch(new SendMailNotification($mail_template, $user_mail));
+            dispatch(new SendMailNotification($mail_template, $user_mail));
         }
     /*mail Template*/
     }
@@ -309,7 +310,7 @@ class UserRegistrationController extends LoginController
         }
         return $this->respondBadRequest('Unknown error occurred. Please try again later or contact us if it continues.');
 
-        // return $this->respondSuccess();
+        return $this->respondSuccess();
     }
 
     /**
@@ -345,7 +346,7 @@ class UserRegistrationController extends LoginController
      public function validateUserMobileForLogin(Request $request)
     {
 
-      if ($request->has('mobile')) 
+      if ($request->has('mobile'))
         {
             $mobile = $request->mobile;
 
@@ -354,22 +355,22 @@ class UserRegistrationController extends LoginController
             if ($validate_exists_mobile) {
                 return $this->respondSuccess(null, 'mobile_exists');
             }
-            
+
          return $this->respondFailed('mobile_does_not_exists');
 
         }
 
-      if ($request->has('email')) 
+      if ($request->has('email'))
          {
                 $email = $request->input('email');
 
             $validate_exists_email = $this->user->belongsTorole(Role::USER)->where('email', $email)->exists();
-            if ($validate_exists_email) 
+            if ($validate_exists_email)
             {
                 return $this->respondSuccess(null, 'email_exists');
             }
 
-         return $this->respondFailed('email_does_not_exists');
+        //  return $this->respond Failed('email_does_not_exists');
 
         }
     }
@@ -452,7 +453,7 @@ class UserRegistrationController extends LoginController
              */
             // Twilio::message($mobileForOtp, $message);
 
-            \Log::info($sms);
+        Log::info($sms);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e);

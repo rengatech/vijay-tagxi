@@ -43,18 +43,18 @@ Route::namespace('Auth')->group(function () {
     Route::namespace('Registration')->group(function () {
 
         // Register a normal user.
-        Route::post('user/register', 'UserRegistrationController@register');
-        Route::post('user/validate-mobile', 'UserRegistrationController@validateUserMobile');
-        Route::post('user/validate-mobile-for-login', 'UserRegistrationController@validateUserMobileForLogin');
+        Route::get('user/register', 'UserRegistrationController@register');
+        Route::get('user/validate-mobile', 'UserRegistrationController@validateUserMobile');
+        Route::get('user/validate-mobile-for-login', 'UserRegistrationController@validateUserMobileForLogin');
         // Register Driver
-        Route::post('driver/register', 'DriverSignupController@register');
+        Route::get('driver/register', 'DriverSignupController@register');
         Route::post('driver/validate-mobile', 'DriverSignupController@validateDriverMobile');
         Route::post('driver/validate-mobile-for-login', 'DriverSignupController@validateDriverMobileForLogin');
         // Send the OTP for mobile verification during User registration.
-        Route::post('user/register/send-otp', 'UserRegistrationController@sendOTP');
+        Route::get('user/register/send-otp', 'UserRegistrationController@sendOTP');
 
         // Send the OTP for email verification during User registration.
-        Route::post('send-mail-otp', 'UserRegistrationController@sendMailOTP');
+        Route::get('send-mail-otp', 'UserRegistrationController@sendMailOTP');
         // Validate the email registration OTP.
         Route::post('validate-email-otp', 'UserRegistrationController@validateEmailOTP');
 

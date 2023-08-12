@@ -26,7 +26,7 @@ class DriverDetail extends Model {
 		'driver_id', 'latitude', 'longitude','bearing','is_socket_connected','current_zone','rating','rated_by','owner','is_company_driver'
 	];
 
-	
+
 
 	/**
 	 * The relationships that can be loaded with query string filtering includes.
@@ -48,5 +48,5 @@ class DriverDetail extends Model {
         return $this->belongsTo(Driver::class, 'admin_id', 'id');
     }
 
-    
+
 }

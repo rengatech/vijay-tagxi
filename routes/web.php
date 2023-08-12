@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Api\V1\Dispatcher\DispatcherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 /*
  * These routes use the root namespace 'App\Http\Controllers\Web'.
  */
+
 Route::namespace('Web')->group(function () {
 
     // All the folder based web routes
@@ -35,7 +36,7 @@ Route::namespace('Web')->group(function () {
     Route::get('/terms', 'FrontPageController@termspage')->name('terms');
     Route::get('/dmv', 'FrontPageController@dmvpage')->name('dmv');
     Route::get('/contactus', 'FrontPageController@contactuspage')->name('contactus');
-    Route::post('/contactussendmail','FrontPageController@contactussendmailadd')->name('contactussendmail');
+    Route::post('/contactussendmail', 'FrontPageController@contactussendmailadd')->name('contactussendmail');
     Route::get('/ride', 'RideBookingController@index');
     Route::post('/ride/user-veification', 'RideBookingController@userVerification');
     // web/user-signin
@@ -43,10 +44,12 @@ Route::namespace('Web')->group(function () {
 
 
 
-    Route::view("success",'success');
-    Route::view("failure",'failure');
+    Route::view("success", 'success');
+    Route::view("failure", 'failure');
 
     // Website home route
     //Route::get('/', 'HomeController@index')->name('home');
+
 });
+
 

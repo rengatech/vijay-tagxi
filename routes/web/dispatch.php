@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Base\Constants\Auth\Role;
+use App\Http\Controllers\Api\v1\Dispatcher\DispatcherController;
 
 Route::middleware('auth:web')->group(function () {
     Route::middleware(role_middleware(Role::DISPATCHER))->group(function () {
@@ -22,3 +23,5 @@ Route::middleware('auth:web')->group(function () {
         Route::get('dispatch/book-now', 'DispatcherController@bookNow');
     });
 });
+
+Route::get('dispatch/available-cars', [DispatcherController::class, 'availbleCars']);
