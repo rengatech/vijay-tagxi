@@ -6,7 +6,7 @@ use App\Events\Event;
 use App\AccountApproved;
 use App\AccountActivated;
 use Kreait\Firebase\Factory;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Http\Requests\User\EtaRequest;
 use App\Http\Controllers\ApiController;
 use App\Transformers\User\EtaTransformer;
@@ -51,7 +51,7 @@ class EtaController extends ApiController
     */
     public function eta(EtaRequest $request)
     {
-        
+
 
         $zone_detail = find_zone($request->input('pick_lat'), $request->input('pick_lng'));
 
@@ -69,7 +69,7 @@ class EtaController extends ApiController
         if(access()->hasRole(Role::DRIVER)){
 
             $type_id = auth()->user()->driver->vehicle_type;
-            
+
             $type = $zone_detail->zoneType()->where('type_id', $type_id)->first();
 
             if(!$type){
@@ -93,7 +93,7 @@ class EtaController extends ApiController
     * @response {
     "success": true,
     "message": "drop_changed_successfully"}
-    * 
+    *
     */
     public function changeDropLocation(Request $request){
 
@@ -151,16 +151,16 @@ class EtaController extends ApiController
             'pick_lng'  => 'required',
         ]);
 
-        
+
         $zone_detail = find_zone(request()->input('pick_lat'), request()->input('pick_lng'));
 
-        $zone_type_package_ids = ZoneTypePackagePrice::where('zone_id',$zone_detail->id)->pluck('package_type_id')->toArray(); 
+        $zone_type_package_ids = ZoneTypePackagePrice::where('zone_id',$zone_detail->id)->pluck('package_type_id')->toArray();
 
         $type = PackageType::active()->whereIn('id',$zone_type_package_ids)->get();
 
         $result = fractal($type, new PackagesTransformer);
 
-        return $this->respondSuccess($result);         
+        return $this->respondSuccess($result);
 
     }
 }

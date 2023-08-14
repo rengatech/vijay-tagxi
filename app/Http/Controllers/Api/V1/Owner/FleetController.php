@@ -15,7 +15,7 @@ use App\Models\Admin\FleetNeededDocument;
 use App\Transformers\Owner\FleetNeededDocumentTransformer;
 use App\Models\Admin\FleetDocument;
 use App\Jobs\Notifications\AndroidPushNotification;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Jobs\Notifications\SendPushNotification;
 
 class FleetController extends BaseController
@@ -55,8 +55,8 @@ class FleetController extends BaseController
 
     /**
      * Store Fleets
-     * 
-     * 
+     *
+     *
      * */
     public function storeFleet(Request $request){
 
@@ -76,8 +76,8 @@ class FleetController extends BaseController
 
     /**
      * List Drivers For Assign Drivers
-     * 
-     * 
+     *
+     *
      * */
     public function listDrivers()
     {
@@ -102,19 +102,19 @@ class FleetController extends BaseController
 
     /**
      * Assign Drivers
-     * 
-     * 
+     *
+     *
      * */
     public function assignDriver(Request $request,Fleet $fleet)
     {
         $driver = Driver::whereId($request->driver_id)->first();
-        
+
         $request->validate([
         'driver_id' => 'required',
         ]);
 
         if($fleet->driver_id==$request->driver_id){
-            
+
             return $this->respondSuccess();
 
         }
@@ -122,7 +122,7 @@ class FleetController extends BaseController
 
             $fleet_driver = $fleet->driverDetail;
 
-            
+
 
             $this->database->getReference('drivers/'.$fleet_driver->id)->update(['fleet_changed'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
@@ -158,7 +158,7 @@ class FleetController extends BaseController
 
         $driver->fresh();
 
-        
+
         $notifable_driver = $driver->user;
 
         $title = trans('push_notifications.new_fleet_assigned_title',[],$notifable_driver->lang);
@@ -170,12 +170,12 @@ class FleetController extends BaseController
         $this->database->getReference('drivers/'.$driver->id)->update(['fleet_changed'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
         return $this->respondSuccess();
-        
+
     }
 
     /**
      * List of Fleet Needed Documents
-     * 
+     *
      * */
     public function neededDocuments(){
 
@@ -197,6 +197,11 @@ class FleetController extends BaseController
         return response()->json(['success'=>true,"message"=>'success','enable_submit_button'=>$uploaded_document,'data'=>$formated_document['data']]);
 
     }
+    // public function availableCars($zone)
+    // {
+    //     $fleetsInZone = Fleet::getFleetsInZone($zone);
 
+    //     return response()->json($fleetsInZone);
+    // }
 
 }

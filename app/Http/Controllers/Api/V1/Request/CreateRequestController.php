@@ -20,7 +20,7 @@ use App\Transformers\Requests\TripRequestTransformer;
 use App\Jobs\Notifications\FcmPushNotification;
 use App\Base\Constants\Setting\Settings;
 use Sk\Geohash\Geohash;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Jobs\Notifications\SendPushNotification;
 use Illuminate\Http\Request as ValidatorRequest;
 
@@ -139,7 +139,7 @@ class CreateRequestController extends BaseController
             'service_location_id'=>$service_location->id,
             'ride_otp'=>rand(1111, 9999)
         ];
-        
+
         if($request->has('is_bid_ride') && $request->input('is_bid_ride')==1){
 
             $request_params['is_bid_ride']=1;
@@ -226,11 +226,11 @@ class CreateRequestController extends BaseController
 
         if(get_settings('trip_dispatch_type')==0){
             $selected_drivers[$i]["active"] = 1;
-           
+
         // Add Driver into Firebase Request Meta
         $this->database->getReference('request-meta/'.$request_detail->id)->set(['driver_id'=>$driver->id,'request_id'=>$request_detail->id,'user_id'=>$request_detail->user_id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
-        
+
         $driver = Driver::find($driver->id);
 
         $notifable_driver = $driver->user;
@@ -254,9 +254,9 @@ class CreateRequestController extends BaseController
         }
 
          usort($selected_drivers, function($a, $b) {
-        
+
         return $a['distance_to_pickup'] <=> $b['distance_to_pickup'];
-    
+
         });
 
 
@@ -268,7 +268,7 @@ class CreateRequestController extends BaseController
         // Add first Driver into Firebase Request Meta
         $this->database->getReference('request-meta/'.$request_detail->id)->set(['driver_id'=>$first_meta_driver,'request_id'=>$request_detail->id,'user_id'=>$request_detail->user_id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
-        
+
         $driver = Driver::find($first_meta_driver);
 
         $notifable_driver = $driver->user;
@@ -279,7 +279,7 @@ class CreateRequestController extends BaseController
         dispatch(new SendPushNotification($notifable_driver,$title,$body));
 
         create_meta_request:
-        
+
         foreach ($selected_drivers as $key => $selected_driver) {
             $request_detail->requestMeta()->create($selected_driver);
         }
@@ -339,7 +339,7 @@ class CreateRequestController extends BaseController
         $i=-1;
 
     foreach ($fire_drivers as $key => $fire_driver) {
-            $i +=1; 
+            $i +=1;
             $driver_updated_at = Carbon::createFromTimestamp($fire_driver['updated_at'] / 1000)->timestamp;
 
 
@@ -367,7 +367,7 @@ class CreateRequestController extends BaseController
 
                 }
 
-            }      
+            }
 
         }
 
@@ -395,7 +395,7 @@ class CreateRequestController extends BaseController
 
         asort($firebase_drivers);
 
-        
+
         if (!empty($firebase_drivers)) {
 
             $nearest_driver_ids = [];
@@ -413,10 +413,10 @@ class CreateRequestController extends BaseController
                 $meta_drivers = RequestMeta::whereHas('request.requestPlace', function ($query) use ($haversine,$driver_search_radius) {
                     $query->select('request_places.*')->selectRaw("{$haversine} AS distance")
                 ->whereRaw("{$haversine} < ?", [$driver_search_radius]);
-                })->pluck('driver_id')->toArray();    
-                    
-                
-                
+                })->pluck('driver_id')->toArray();
+
+
+
 
                 $nearest_drivers = Driver::where('active', 1)->where('approve', 1)->where('available', 1)->whereIn('id', $nearest_driver_ids)->whereNotIn('id', $meta_drivers)->limit(10)->get();
 
@@ -438,11 +438,11 @@ class CreateRequestController extends BaseController
                 }else{
 
                     foreach ($nearest_drivers as $key => $nearest_driver) {
-                        
+
                         if($nearest_driver->enable_my_route_booking && $has_enabled_my_route_drivers!=null &$route_coordinates!=null){
 
                             $enabled_route_matched = $nearest_driver->intersects('route_coordinates',$route_coordinates)->first();
-                            
+
                             if(!$enabled_route_matched){
 
                                 $nearest_drivers->forget($key);
@@ -465,9 +465,9 @@ class CreateRequestController extends BaseController
 
                                 $nearest_drivers->forget($key);
 
-                            }    
                             }
-                            
+                            }
+
 
                         }
 
@@ -554,7 +554,7 @@ class CreateRequestController extends BaseController
            $request_params['request_eta_amount'] = $request->request_eta_amount;
 
         }
-        
+
         if($request->has('rental_pack_id') && $request->rental_pack_id){
 
             $request_params['is_rental'] = true;
@@ -596,8 +596,8 @@ class CreateRequestController extends BaseController
 
     /**
      * Respond For Bid ride
-     * 
-     * 
+     *
+     *
      * */
     public function respondForBid(ValidatorRequest $request){
 
@@ -635,7 +635,7 @@ class CreateRequestController extends BaseController
             $driver->save();
 
         $notifable_driver = $driver->user;
-        
+
         $title = trans('push_notifications.ride_confirmed_by_user_title',[],$notifable_driver->lang);
         $body = trans('push_notifications.ride_confirmed_by_user_body',[],$notifable_driver->lang);
 

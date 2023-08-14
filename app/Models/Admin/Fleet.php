@@ -49,4 +49,9 @@ class Fleet extends Model
     public function driverDetail(){
         return $this->belongsTo(Driver::class,'driver_id','id');
     }
+
+    public function details()
+    {
+        return $this->hasMany(DriverDetail::class);
+    }
 }

@@ -16,7 +16,7 @@ use App\Base\Constants\Auth\Role;
 use App\Models\User;
 use App\Models\Request\FavouriteLocation;
 use App\Models\Payment\UserBankInfo;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 
 /**
  * @group Profile-Management
@@ -186,12 +186,12 @@ class ProfileController extends ApiController
             $driver_details->driverVehicleTypeDetail()->delete();
 
             foreach (json_decode($request->vehicle_types) as $key => $type) {
-            
+
                 $driver_details->driverVehicleTypeDetail()->create(['vehicle_type'=>$type]);
-            
+
             }
       }
-                    
+
 
         $result = fractal($driver_details, new DriverTransformer)->parseIncludes(['onTripRequest.userDetail','onTripRequest.requestBill','metaRequest.userDetail']);
 

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Transformers\Driver\DriverTransformer;
 use App\Transformers\Owner\FleetTransformer;
 use App\Base\Services\ImageUploader\ImageUploaderContract;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Models\User;
 use App\Base\Constants\Auth\Role;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +33,7 @@ class FleetDriversController extends BaseController
         $this->fleet = $fleet;
 
         $this->database = $database;
-        
+
         $this->imageUploader = $imageUploader;
 
         $this->user = $user;
@@ -42,8 +42,8 @@ class FleetDriversController extends BaseController
 
     /**
      * List Drivers For Assign Drivers
-     * 
-     * 
+     *
+     *
      * */
     public function listDrivers()
     {
@@ -52,7 +52,7 @@ class FleetDriversController extends BaseController
         $drivers = Driver::where('owner_id',$owner_id)->get();
 
         $result = fractal($drivers, new DriverTransformer);
-    
+
         return $this->respondOk($result);
 
     }
@@ -64,8 +64,8 @@ class FleetDriversController extends BaseController
      * @bodyParam mobile string required mobile of the driver
      * @bodyParam address string required address of the driver
      * @bodyParam profile string required profile pic of the driver
-     * 
-     * 
+     *
+     *
      * */
     public function addDriver(Request $request){
 
@@ -134,8 +134,8 @@ class FleetDriversController extends BaseController
 
     /**
      * Delete Drivers
-     * 
-     * 
+     *
+     *
      * */
     public function deleteDriver(Driver $driver){
 
@@ -150,6 +150,6 @@ class FleetDriversController extends BaseController
 
     }
 
-    
+
 
 }

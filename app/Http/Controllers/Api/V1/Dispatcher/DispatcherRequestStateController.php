@@ -19,7 +19,7 @@ use App\Jobs\Notifications\AndroidPushNotification;
 use App\Transformers\Requests\TripRequestTransformer;
 use App\Models\User;
 use Sk\Geohash\Geohash;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Base\Constants\Auth\Role;
 use Carbon\Carbon;
 use App\Http\Requests\Request\CancelTripRequest;
@@ -40,7 +40,7 @@ class DispatcherRequestStateController extends BaseController
         $this->request = $request;
         $this->database = $database;
     }
-    
+
     /**
     * Cancel Request
     * @bodyParam request_id uuid required id of request
@@ -82,7 +82,7 @@ class DispatcherRequestStateController extends BaseController
         // Delete Meta Driver From Firebase
             $this->database->getReference('request-meta/'.$request_detail->id)->remove();
 
-        
+
         if ($driver) {
 
             $driver->available = true;
@@ -95,10 +95,10 @@ class DispatcherRequestStateController extends BaseController
             $push_request_detail = $request_result->toJson();
             $title = trans('push_notifications.trip_cancelled_by_user_title',[],$notifiable_driver);
             $body = trans('push_notifications.trip_cancelled_by_user_body',[],$notifiable_driver);
-            
+
             dispatch(new SendPushNotification($notifiable_driver,$title,$body));
         }
-        // Delete meta records        
+        // Delete meta records
         $request_detail->requestMeta()->delete();
     }
 }

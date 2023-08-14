@@ -32,7 +32,7 @@ Route::prefix('dispatcher')->namespace('Dispatcher')->middleware('auth')->group(
 });
 
 
-Route::get('/available-cars', 'DispatcherController@createZone');
+Route::get('/zones/{zone_id}/available-cars', [DispatcherController::class, 'find']);
 
 // Route::get('/available-cars', [DispatcherController::class,'createZone']);
 

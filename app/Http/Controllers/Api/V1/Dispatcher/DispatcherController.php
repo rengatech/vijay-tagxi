@@ -75,17 +75,9 @@ class DispatcherController extends BaseController
 
 //    }
 
-    public function availbleCars(Request $request)
+    public function find(Request $request, string $zone_id)
     {
-        $driver_detail = DriverDetail::where($request->current_zone)->get();
-
-
-        dd($driver_detail);
-
-        // $createZone = Fleet::whereHas('driverDetail', function ($query) use ($driver_detail) {
-        //     $query->where('current_zone', '=', $driver_detail->id);
-        // })->get();
-
+        $driver_detail = DriverDetail::with(['driver',"fleet"])->where('current_zone', $zone_id)->get();
 
 
         return response()->json($driver_detail);

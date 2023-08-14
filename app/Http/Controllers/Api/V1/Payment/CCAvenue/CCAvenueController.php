@@ -24,7 +24,7 @@ use App\Models\Payment\OwnerWallet;
 use App\Models\Payment\OwnerWalletHistory;
 use App\Transformers\Payment\OwnerWalletTransformer;
 use App\Models\Request\Request as RequestModel;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use App\Jobs\Notifications\SendPushNotification;
@@ -45,17 +45,17 @@ class CCAvenueController extends ApiController
     }
     /**
      * Initialize Payment
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * */
     public function initialize(Request $request){
 
 $merchant_data = '';
-$working_key =   get_settings(Settings::WORKING_KEY);  //'679B1A4387D10902995FC11DE9DC7B6C'; 
+$working_key =   get_settings(Settings::WORKING_KEY);  //'679B1A4387D10902995FC11DE9DC7B6C';
 $access_code = get_settings(Settings::ACCESS_CODE);  // 'AVWH88JF34BF85HWFB  ';
 $merchant_id = get_settings(Settings::MERCHANT_ID);  //'987718';
-$response_url = get_settings(Settings::RESPONSE_URL);  //'https://girki.co.in/api/v1/ccavenue/webhook'; 
+$response_url = get_settings(Settings::RESPONSE_URL);  //'https://girki.co.in/api/v1/ccavenue/webhook';
 $amount = $request->amount;
 
 foreach ($_POST as $key => $value) {
@@ -96,7 +96,7 @@ $data = [
     'access_code' => $access_code,
 ];
 
-    
+
 return response()->json($data);
 
 
@@ -105,7 +105,7 @@ return response()->json($data);
 
     public function webHook(Request $request){
 
-$working_key = '679B1A4387D10902995FC11DE9DC7B6C'; 
+$working_key = '679B1A4387D10902995FC11DE9DC7B6C';
 $encResponse = $_POST["encResp"]; // This is the response sent by the CCAvenue Server
 $rcvdString = decryptCC($encResponse, $working_key); // Crypto Decryption used as per the specified working key.
 $order_status = "";
@@ -116,8 +116,8 @@ for ($i = 0; $i < $dataSize; $i++) {
     $responseMap[$information[0]] = $information[1];
 }
 $order_status = $responseMap['order_status'];
-    
-    
+
+
     $result = json_encode($responseMap);
 
     $request_result= json_decode($result,true);
@@ -142,7 +142,7 @@ $order_status = $responseMap['order_status'];
     }
 
     $exploded_reference = explode('ORD', $order_id);
-    
+
     if(count($exploded_reference)<2){
             goto end;
     }
@@ -211,13 +211,13 @@ $order_status = $responseMap['order_status'];
 
      /**
      * Make Payment At end of the ride
-     * 
+     *
      * */
     public function makePaymentForRide($request_id,$transaction_id){
 
-        $request_detail = RequestModel::find($request_id); 
+        $request_detail = RequestModel::find($request_id);
 
-        $driver = $request_detail->driverDetail;    
+        $driver = $request_detail->driverDetail;
 
         //  Update payement status
         $request_detail->is_paid = 1;
@@ -253,5 +253,5 @@ $order_status = $responseMap['order_status'];
     }
 
 
-    
+
 }

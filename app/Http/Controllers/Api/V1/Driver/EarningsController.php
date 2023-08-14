@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\V1\BaseController;
 use App\Base\Constants\Setting\Settings;
 use App\Base\Constants\Auth\Role;
 use Illuminate\Http\Request as ValidatorRequest;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use Sk\Geohash\Geohash;
 use App\Transformers\Driver\LeaderBoardEarningsTransformer;
 use App\Transformers\Driver\LeaderBoardTripsTransformer;
@@ -29,7 +29,7 @@ class EarningsController extends BaseController
     {
         $this->request = $request;
         $this->database = $database;
-        
+
     }
     /**
     * Today-Earnings
@@ -92,7 +92,7 @@ class EarningsController extends BaseController
 
     /**
      * Owner Eanrings
-     * 
+     *
      * */
     public function ownerEarningsIndex()
     {
@@ -118,7 +118,7 @@ class EarningsController extends BaseController
             $query->where('owner_id', $owner->id)->where('is_completed', 1)->whereDate('trip_start_time', $current_date)->where('payment_opt', '1'); //cash
         })->sum('driver_commision');
 
-    
+
 
         $total_hours_worked = 0;
 
@@ -257,8 +257,8 @@ class EarningsController extends BaseController
 
     /**
      * Owner Weekly Earnings
-     * 
-     * 
+     *
+     *
      * */
 
     public function ownerWeeklyEarningsIndex()
@@ -349,7 +349,7 @@ class EarningsController extends BaseController
             })->get()->count();
 
         $currency_symbol = auth()->user()->countryDetail->currency_symbol;
-        
+
 
         return response()->json(['success'=>true,'message'=>'weekly_earnings','data'=>['week_days'=>$weekDays,'current_date'=>$converted_current_date,'current_week_number'=>$current_week_number,'start_of_week'=>$converted_start_of_week,'end_of_week'=>$converted_end_of_week,'disable_next_week'=>$disable_next_week,'disable_previous_week'=>$disable_previous_week,'total_trips_count'=>$total_trips,'total_trip_kms'=>$total_trip_kms,'total_earnings'=>$total_earnings,'total_cash_trip_amount'=>$total_cash_trip_amount,'total_wallet_trip_amount'=>$total_wallet_trip_amount,'total_cash_trip_count'=>$total_cash_trip_count,'total_wallet_trip_count'=>$total_wallet_trip_count,'currency_symbol'=>$currency_symbol,'total_hours_worked'=>$total_hours_worked]]);
     }
@@ -431,8 +431,8 @@ class EarningsController extends BaseController
 
     /**
      * Owner Earnings Report
-     * 
-     * 
+     *
+     *
      * */
     public function ownerEarningsReport($from_date, $to_date)
     {
@@ -498,7 +498,7 @@ class EarningsController extends BaseController
      * Driver Leaderboard by their earnings
      * @bodyParam current_lat double required current lat of the driver
      * @bodyParam current_lng double required current lng of the driver
-     * 
+     *
      * */
     public function leaderBoardEarnings(ValidatorRequest $request)
     {
@@ -526,7 +526,7 @@ class EarningsController extends BaseController
      * Driver Leaderboard by their earnings
      * @bodyParam current_lat double required current lat of the driver
      * @bodyParam current_lng double required current lng of the driver
-     * 
+     *
      * */
     public function leaderBoardTrips(ValidatorRequest $request)
     {
@@ -590,7 +590,7 @@ class EarningsController extends BaseController
 
                     $firebase_drivers[$fire_driver['id']]['distance']= $distance;
 
-                }   
+                }
 
         }
 
@@ -613,7 +613,7 @@ class EarningsController extends BaseController
 
             return $nearest_driver_ids;
 
-    
+
     }
 
 

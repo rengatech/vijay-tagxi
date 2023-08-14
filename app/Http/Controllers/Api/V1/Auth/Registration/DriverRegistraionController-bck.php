@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Country;
 use App\Models\Admin\Driver;
 use Illuminate\Http\Request;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Base\Constants\Auth\Role;
 use Illuminate\Support\Facades\DB;
 use App\Events\Auth\UserRegistered;
@@ -200,9 +200,9 @@ class DriverRegistrationControllerBCK extends LoginController
         if ($validate_exists_email) {
             $this->throwCustomException('Provided email has already been taken');
         }
-        
+
         }
-        
+
 
 
         if ($validate_exists_mobile) {
@@ -211,7 +211,7 @@ class DriverRegistrationControllerBCK extends LoginController
 
         return $this->respondSuccess(null, 'mobile_validated');
     }
-   
+
     /**
     * Validate Mobile-For-Driver-For-Login
     * @bodyParam mobile integer required mobile of driver

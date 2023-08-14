@@ -27,7 +27,7 @@ use App\Models\Payment\OwnerWallet;
 use App\Models\Payment\OwnerWalletHistory;
 use App\Transformers\Payment\OwnerWalletTransformer;
 use App\Models\Request\Request as RequestModel;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Jobs\Notifications\SendPushNotification;
 
 /**
@@ -43,7 +43,7 @@ class StripeController extends ApiController
     {
         $this->database = $database;
     }
-    
+
      /**
      * Setup a client secret
      * @response {
@@ -113,7 +113,7 @@ class StripeController extends ApiController
       ],
     ],
             ]);
-        
+
         // $setup_intent = SetupIntent::create();
         $obj = new \stdClass;
         $obj->message = "Client_token";
@@ -150,7 +150,7 @@ class StripeController extends ApiController
     {
             $transaction_id = $request->payment_id;
             $user = auth()->user();
-        
+
             if (access()->hasRole('user')) {
             $wallet_model = new UserWallet();
             $wallet_add_history_model = new UserWalletHistory();
@@ -181,7 +181,7 @@ class StripeController extends ApiController
 
 
                 $pus_request_detail = json_encode($request->all());
-        
+
                 $socket_data = new \stdClass();
                 $socket_data->success = true;
                 $socket_data->success_message  = PushEnums::AMOUNT_CREDITED;
@@ -191,7 +191,7 @@ class StripeController extends ApiController
                 $body = trans('push_notifications.amount_credited_to_your_wallet_body',[],$user->lang);
 
                 // dispatch(new NotifyViaMqtt('add_money_to_wallet_status'.$user_id, json_encode($socket_data), $user_id));
-                
+
                 dispatch(new SendPushNotification($user,$title,$body));
 
                 if (access()->hasRole(Role::USER)) {
@@ -211,7 +211,7 @@ class StripeController extends ApiController
      * @bodyParam amount double required  amount of the invoice
      * @bodyParam request_id string required  request_id of invoice
      * @bodyParam payment_id string required  payment_id from transaction
-     * 
+     *
      * */
     public function makePaymentForRide(Request $request){
 
@@ -222,9 +222,9 @@ class StripeController extends ApiController
         $transaction_id = $request->payment_id;
         $user = auth()->user();
 
-        $request_detail = RequestModel::find($request->request_id); 
+        $request_detail = RequestModel::find($request->request_id);
 
-        $driver = $request_detail->driverDetail;    
+        $driver = $request_detail->driverDetail;
 
         //  Update payement status
         $request_detail->is_paid = 1;
@@ -263,7 +263,7 @@ class StripeController extends ApiController
 
     /**
      * Add/update Subscription
-     * 
+     *
      * */
     public function addOrUpdateSubscription(Request $request)
     {
@@ -284,5 +284,5 @@ class StripeController extends ApiController
 
     }
 
-    
+
 }

@@ -15,7 +15,7 @@ use App\Http\Requests\Request\AcceptRejectRequest;
 use App\Jobs\Notifications\AndroidPushNotification;
 use App\Transformers\Requests\TripRequestTransformer;
 use App\Models\Request\DriverRejectedRequest;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Jobs\Notifications\SendPushNotification;
 
 /**
@@ -121,13 +121,13 @@ class RequestAcceptRejectController extends BaseController
             $push_request_detail = $request_result->toJson();
             // Delete Driver record from meta table
             RequestMeta::where('request_id', $request->input('request_id'))->where('driver_id', $driver->id)->delete();
-            
+
             // Send request to next driver
             $request_meta = RequestMeta::where('request_id', $request->input('request_id'))->first();
             if ($request_meta) {
                 $request_meta->update(['active'=>true]);
                 // @TODO Send push notification like create request to the driver
-                
+
                 $push_data = ['notification_enum'=>PushEnums::REQUEST_CREATED,'result'=>(string)$push_request_detail];
                 $driver = Driver::find($request_meta->driver_id);
 
@@ -168,7 +168,7 @@ class RequestAcceptRejectController extends BaseController
                 $body = trans('push_notifications.no_driver_found_body',[],$user->lang);
 
                 dispatch(new SendPushNotification($user,$title,$body));
-                
+
                 $push_data = ['notification_enum'=>PushEnums::NO_DRIVER_FOUND,'result'=>(string)$push_request_detail];
                 // Form a socket sturcture using users'id and message with event name
                 $socket_data = new \stdClass();

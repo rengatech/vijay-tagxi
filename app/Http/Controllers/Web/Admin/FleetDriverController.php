@@ -39,7 +39,7 @@ use App\Base\Constants\Masters\WalletRemarks;
 use Illuminate\Support\Str;
 use App\Models\Payment\WalletWithdrawalRequest;
 use App\Base\Constants\Setting\Settings;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Models\Admin\Owner;
 use App\Jobs\Notifications\SendPushNotification;
 
@@ -293,12 +293,12 @@ class FleetDriverController extends BaseController
         $user_param = $request->only(['profile']);
 
         $user_param['profile']=null;
-        
+
         if ($uploadedFile = $this->getValidatedUpload('profile_picture', $request)) {
             $user_param['profile'] = $this->imageUploader->file($uploadedFile)
                 ->saveProfilePicture();
         }
-        
+
         $driver->update(['name'=>$request->input('name'),
             'email'=>$request->input('email'),
             'mobile'=>$request->input('mobile'),
@@ -478,7 +478,7 @@ class FleetDriverController extends BaseController
         // dd($item);
 
         $amount = DriverWallet::where('user_id',$driver->id)->first();
-        
+
         if ($amount == null) {
 
          $card = [];
@@ -547,7 +547,7 @@ class FleetDriverController extends BaseController
     //     $page = trans('pages_names.drivers');
     //     $main_menu = 'fleet-drivers';
     //     $sub_menu = 'driver_ratings';
-       
+
     //     return view('admin.fleet-drivers.driver-ratings', compact('page', 'main_menu', 'sub_menu'));
 
     // }

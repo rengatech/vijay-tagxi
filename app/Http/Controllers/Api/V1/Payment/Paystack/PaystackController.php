@@ -24,7 +24,7 @@ use App\Models\Payment\OwnerWallet;
 use App\Models\Payment\OwnerWalletHistory;
 use App\Transformers\Payment\OwnerWalletTransformer;
 use App\Models\Request\Request as RequestModel;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use App\Jobs\Notifications\SendPushNotification;
@@ -43,9 +43,9 @@ class PaystackController extends ApiController
     }
     /**
      * Initialize Payment
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * */
     public function initialize(Request $request){
 
@@ -197,13 +197,13 @@ class PaystackController extends ApiController
 
     /**
      * Make Payment At end of the ride
-     * 
+     *
      * */
     public function makePaymentForRide($request_id,$transaction_id){
 
-        $request_detail = RequestModel::find($request_id); 
+        $request_detail = RequestModel::find($request_id);
 
-        $driver = $request_detail->driverDetail;    
+        $driver = $request_detail->driverDetail;
 
         //  Update payement status
         $request_detail->is_paid = 1;
@@ -239,5 +239,5 @@ class PaystackController extends ApiController
     }
 
 
-    
+
 }

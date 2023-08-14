@@ -13,7 +13,7 @@ use App\Models\Admin\Driver;
 use App\Models\Request\RequestBill;
 use App\Models\Request\Request as RequestModel;
 use DB;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 
 /**
  * @group Vehicle Management
@@ -38,7 +38,7 @@ class CarMakeAndModelController extends BaseController
     *
     */
     public function getCarMakes()
-    { 
+    {
         if(request()->has('vehicle_type')){
 
         return $this->respondSuccess($this->car_make->active()->orderBy('name')->where('vehicle_make_for',request()->vehicle_type)->get());
@@ -90,11 +90,11 @@ class CarMakeAndModelController extends BaseController
     }
 
 
-    
+
 
     /**
      * Test Api
-     * 
+     *
      * */
     public function testApi(Request $request){
 
@@ -112,7 +112,7 @@ class CarMakeAndModelController extends BaseController
         ->groupBy('requests.driver_id')
         ->orderBy('commission', 'desc')->whereIn('driver_id',$nearest_driver_ids)
         ->get()->toArray();
-        
+
         // dd($data);
 
         $driver_trips = RequestModel::whereDate('trip_start_time',$today)->join('drivers', 'requests.driver_id', '=', 'drivers.id')->groupBy('driver_id')->selectRaw('count(*) as total, driver_id, name')->orderBy('total', 'desc')->whereIn('driver_id',$nearest_driver_ids)->get()->toArray();
@@ -127,7 +127,7 @@ class CarMakeAndModelController extends BaseController
      * @bodyParam pick_lng double required pikup lng of the user
      * @bodyParam drop_lat double required drop lat of the user
      * @bodyParam drop_lng double required drop lng of the user
-     * 
+     *
      * */
     public function testDistanceMatrixApi(Request $request){
 
@@ -143,12 +143,12 @@ class CarMakeAndModelController extends BaseController
 
         if($request->has('map_key') && $request->map_key){
 
-            $distance_matrix_result = get_distance_matrix_of_clients($request->pick_lat, $request->pick_lng, $request->drop_lat, $request->drop_lng,$request->map_key);    
+            $distance_matrix_result = get_distance_matrix_of_clients($request->pick_lat, $request->pick_lng, $request->drop_lat, $request->drop_lng,$request->map_key);
         }else{
 
             $distance_matrix_result = get_distance_matrix($request->pick_lat, $request->pick_lng, $request->drop_lat, $request->drop_lng,true,$request->map_key);
         }
-        
+
 
         if($distance_matrix_result->status=='OK'){
             return $this->respondSuccess($distance_matrix_result);
@@ -211,7 +211,7 @@ class CarMakeAndModelController extends BaseController
 
                     $firebase_drivers[$fire_driver['id']]['distance']= $distance;
 
-                }   
+                }
 
         }
 
@@ -234,6 +234,6 @@ class CarMakeAndModelController extends BaseController
 
             return $nearest_driver_ids;
 
-    
+
     }
 }

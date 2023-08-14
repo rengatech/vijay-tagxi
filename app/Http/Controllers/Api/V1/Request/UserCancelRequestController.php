@@ -15,7 +15,7 @@ use App\Base\Constants\Masters\WalletRemarks;
 use App\Base\Constants\Masters\zoneRideType;
 use App\Base\Constants\Masters\PaymentType;
 use App\Models\Admin\CancellationReason;
-use Kreait\Firebase\Contract\Database;
+use Kreait\Firebase\Database;
 use App\Jobs\Notifications\SendPushNotification;
 
 /**
@@ -86,7 +86,7 @@ class UserCancelRequestController extends BaseController
 
                 $charge_applicable = false;
             }
-            
+
         }
 
         /**
@@ -140,7 +140,7 @@ class UserCancelRequestController extends BaseController
         // Delete Meta Driver From Firebase
             $this->database->getReference('request-meta/'.$request_detail->id)->remove();
 
-        
+
         if ($driver) {
 
             // $this->database->getReference('request-meta/'.$request_detail.'/'.$driver->id)->remove();
@@ -166,16 +166,16 @@ class UserCancelRequestController extends BaseController
             // $socket_message = structure_for_socket($driver->id, 'driver', $socket_data, 'request_handler');
 
             // dispatch(new NotifyViaSocket('transfer_msg', $socket_message));
-            
+
             // Send data via Mqtt
             // dispatch(new NotifyViaMqtt('request_handler_'.$driver->id, json_encode($socket_data), $driver->id));
 
-           
+
             dispatch(new SendPushNotification($notifiable_driver,$title,$body));
         }
         // Delete meta records
         // RequestMeta::where('request_id', $request_detail->id)->delete();
-        
+
         $request_detail->requestMeta()->delete();
 
         return $this->respondSuccess();

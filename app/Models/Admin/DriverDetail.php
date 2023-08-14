@@ -45,7 +45,12 @@ class DriverDetail extends Model {
      */
     public function driver()
     {
-        return $this->belongsTo(Driver::class, 'admin_id', 'id');
+        return $this->belongsTo(Driver::class, 'driver_id', 'id');
+    }
+
+    public function fleet()
+    {
+        return $this->hasOne(Fleet::class, 'driver_id', 'driver_id');
     }
 
 

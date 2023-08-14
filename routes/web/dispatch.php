@@ -24,4 +24,3 @@ Route::middleware('auth:web')->group(function () {
     });
 });
 
-Route::get('dispatch/available-cars', [DispatcherController::class, 'availbleCars']);
